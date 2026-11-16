@@ -1,0 +1,577 @@
+
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int n,W;
+    float p[20],w[20],r[20];
+
+    // Input number of items
+    cout<<"Enter number of items: ";
+    cin>>n;
+
+    // Input profit and weight of each item
+    for(int i=0;i<n;i++)
+    {
+        cout<<"Enter profit and weight: ";
+        cin>>p[i]>>w[i];
+
+        // Calculate profit-to-weight ratio
+        r[i]=p[i]/w[i];
+    }
+
+    // Input knapsack capacity
+    cout<<"Enter capacity: ";
+    cin>>W;
+
+    // Sort items by ratio in descending order
+    for(int i=0;i<n;i++)
+        for(int j=i+1;j<n;j++)
+            if(r[i]<r[j])
+            {
+                // Swap ratio, profit and weight
+                swap(r[i],r[j]);
+                swap(p[i],p[j]);
+                swap(w[i],w[j]);
+            }
+
+    float profit=0;
+
+    // Select items using Greedy Method
+    for(int i=0;i<n;i++)
+    {
+        // If complete item fits
+        if(W>=w[i])
+        {
+            profit+=p[i];
+            W-=w[i];
+        }
+        else
+        {
+            // Take only the required fraction
+            profit+=r[i]*W;
+            break;
+        }
+    }
+
+    // Display maximum profit
+    cout<<"Maximum Profit = "<<profit;
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Start the program.
+
+Take the number of items from the user.
+
+Take the profit and weight of each item.
+
+Calculate the profit-to-weight ratio for every item.
+
+Take the maximum capacity of the knapsack.
+
+Sort the items in descending order of their profit-to-weight ratio.
+
+Select the item having the highest ratio first.
+
+If the item fits completely, add its full profit to the total profit.
+
+Subtract its weight from the remaining capacity.
+
+If the item does not fit completely, take only the fraction that fits.
+
+Add the profit of that fraction to the total profit.
+
+Stop when the knapsack becomes full.
+
+Display the maximum profit.
+
+End the program.

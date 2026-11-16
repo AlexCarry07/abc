@@ -1,0 +1,642 @@
+
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <string>
+#include <functional>
+using namespace std;
+
+// Structure to store character, frequency and child nodes
+struct Node
+{
+    char ch;
+    int f;
+    Node *l, *r;
+
+    // Constructor to initialize the node
+    Node(char c, int n)
+    {
+        ch = c;
+        f = n;
+        l = r = NULL;
+    }
+};
+
+// Function to print Huffman codes
+void print(Node* t, string s)
+{
+    // Stop if node is NULL
+    if(!t) return;
+
+    // If leaf node, print character and its code
+    if(!t->l && !t->r)
+        cout << t->ch << " : " << s << endl;
+
+    // Left side represents 0
+    print(t->l, s + "0");
+
+    // Right side represents 1
+    print(t->r, s + "1");
+}
+
+int main()
+{
+    // Create a min-priority queue
+    // Node with smallest frequency comes first
+    priority_queue<pair<int,Node*>,
+    vector<pair<int,Node*>>,
+    greater<pair<int,Node*>>> q;
+
+    int n;
+
+    // Take number of characters
+    cout << "Enter number of characters: ";
+    cin >> n;
+
+    // Take characters and their frequencies
+    for(int i = 0; i < n; i++)
+    {
+        char c;
+        int f;
+        cin >> c >> f;
+
+        // Create node and insert into priority queue
+        q.push({f, new Node(c, f)});
+    }
+
+    // Build Huffman Tree
+    // Repeat until only one node remains
+    while(q.size() > 1)
+    {
+        // Remove two nodes with minimum frequencies
+        Node *a = q.top().second;
+        q.pop();
+
+        Node *b = q.top().second;
+        q.pop();
+
+        // Create a new parent node with combined frequency
+        Node *t = new Node('$', a->f + b->f);
+
+        // Connect both nodes to the parent
+        t->l = a;
+        t->r = b;
+
+        // Insert the new parent node into the queue
+        q.push({t->f, t});
+    }
+
+    // Print Huffman codes starting from root
+    print(q.top().second, "");
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Take the number of characters from the user.
+
+Take each character and its frequency.
+
+Create a node for every character.
+
+Insert all nodes into a priority queue.
+
+The priority queue arranges nodes in ascending order of frequency.
+
+Select the two nodes having the smallest frequencies.
+
+Remove these two nodes from the queue.
+
+Add their frequencies and create a new parent node.
+
+Make the first node the left child and the second node the right child.
+
+Insert the new parent node into the priority queue.
+
+Repeat until only one node remains.
+
+The remaining node becomes the root of the Huffman tree.
+
+Traverse the tree to generate Huffman codes.
+
+Assign 0 to the left branch and 1 to the right branch.
+
+Print each character with its Huffman code.
+
+Finally, terminate the program.
